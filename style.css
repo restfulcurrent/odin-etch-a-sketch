@@ -3,6 +3,7 @@
 *::after {
     margin: 0px;
     padding: 0px;
+    box-sizing: border-box;
 }
 
 body {
@@ -11,6 +12,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: rgb(235, 235, 235);
 }
 
 .container {
@@ -28,5 +30,5 @@ body {
 
 .grid-square {
     flex: 1;
-    background-color: rgb(187, 187, 238);
+    background-color: white;
 }
