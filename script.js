@@ -1,8 +1,8 @@
-const container = document.querySelector(".container");
-createGrid(container);
-enablePainting(container);
+const gridContainer = document.querySelector(".grid-container");
+createGrid(gridContainer);
+enablePainting(gridContainer);
 
-function createGrid(container) {
+function createGrid(gridContainer) {
     const SIDE_LENGTH = 16;
     
     for (let i = 0; i < SIDE_LENGTH; i++) {
@@ -18,14 +18,14 @@ function createGrid(container) {
             row.appendChild(gridSquare);
         }
     
-        container.appendChild(row);
+        gridContainer.appendChild(row);
     }
 }
 
 
-function enablePainting(container) {
-    container.addEventListener("mouseover", logMouseOver);
-    container.addEventListener("mouseout", logMouseOut);
+function enablePainting(gridContainer) {
+    gridContainer.addEventListener("mouseover", logMouseOver);
+    gridContainer.addEventListener("mouseout", logMouseOut);
     
     function logMouseOver(event) {
         // Get the hovered grid square
