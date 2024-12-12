@@ -50,3 +50,7 @@ body {
 .hovered {
     background-color: rgb(168, 182, 247);
 }
+
+button {
+    padding: 2px 4px;
+}
