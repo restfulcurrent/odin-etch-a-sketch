@@ -1,16 +1,17 @@
 const gridContainer = document.querySelector(".grid-container");
+const DEFAULT_SIDELENGTH = 16;
 createGrid(gridContainer);
 enablePainting(gridContainer);
 
-function createGrid(gridContainer) {
-    const SIDE_LENGTH = 16;
-    
-    for (let i = 0; i < SIDE_LENGTH; i++) {
+// Creates a n x n grid of squares where n is the side length in terms of squares
+// Input: grid container div, side length (n)
+function createGrid(gridContainer, sideLength = DEFAULT_SIDELENGTH) {    
+    for (let i = 0; i < sideLength; i++) {
         const row = document.createElement("div");
         row.classList.add("row");
         row.setAttribute("id", `r-${i}`);
     
-        for (let j = 0; j < SIDE_LENGTH; j++) {
+        for (let j = 0; j < sideLength; j++) {
             const gridSquare = document.createElement("div");
             gridSquare.classList.add("grid-square");
             gridSquare.setAttribute("id", `gs-${i}-${j}`);
@@ -22,7 +23,7 @@ function createGrid(gridContainer) {
     }
 }
 
-
+// Paintsgrid squares when they are hovered over
 function enablePainting(gridContainer) {
     gridContainer.addEventListener("mouseover", logMouseOver);
     gridContainer.addEventListener("mouseout", logMouseOut);
