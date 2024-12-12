@@ -1,6 +1,6 @@
 const gridContainer = document.querySelector(".grid-container");
-const DEFAULT_SIDELENGTH = 16;
-initializeGrid(gridContainer);
+const INITIAL_SIDELENGTH = 16;
+initializeGrid(gridContainer, INITIAL_SIDELENGTH);
 enablePainting(gridContainer);
 
 const gridDensityBtn = document.createElement("button");
@@ -8,7 +8,7 @@ initializeGridDensityBtn(gridDensityBtn);
 
 // Creates and displays an n x n grid of squares where n is the side length in terms of squares
 // Input: grid container div, side length (n)
-function initializeGrid(gridContainer, sideLength = DEFAULT_SIDELENGTH) {    
+function initializeGrid(gridContainer, sideLength) {    
     for (let i = 0; i < sideLength; i++) {
         // Create row container
         const row = document.createElement("div");
