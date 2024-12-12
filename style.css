@@ -11,16 +11,30 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     background-color: rgb(235, 235, 235);
 }
 
-.grid-container {
+.content-wrapper {
+    display: flex;
+    padding: 40px;
+    gap: 2%;
+}
+
+.lhs {
+    flex: 1;
+}
+
+.grid {
+    flex: 1;
+    flex-grow: 2;
+    aspect-ratio: 1 / 1;
+    max-width: 800px;
     display: flex;
     flex-direction: column;
-    max-height: 50vw;
+}
+
+.rhs {
     flex: 1;
-    aspect-ratio: 1/1;
 }
 
 .row {
@@ -33,6 +47,6 @@ body {
     background-color: white;
 }
 
-.hovered {
+/* .hovered {
     background-color: rgb(168, 182, 247);
-}
+} */
