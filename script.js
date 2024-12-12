@@ -31,6 +31,10 @@ function enablePainting(gridContainer) {
     function logMouseOver(event) {
         // Get the hovered grid square
         const target = event.target;
+
+        // If target is not a grid square, do nothing
+        if (!target.classList.contains("grid-square")) return;
+
         console.log(`over -> ${target.id}`);
     
         // Paint the grid square
