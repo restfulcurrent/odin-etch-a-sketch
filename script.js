@@ -3,6 +3,9 @@ const DEFAULT_SIDELENGTH = 16;
 createGrid(gridContainer);
 enablePainting(gridContainer);
 
+const gridDensityBtn = document.createElement("button");
+initializeGridDensityBtn(gridDensityBtn);
+
 // Creates a n x n grid of squares where n is the side length in terms of squares
 // Input: grid container div, side length (n)
 function createGrid(gridContainer, sideLength = DEFAULT_SIDELENGTH) {    
@@ -45,5 +48,40 @@ function enablePainting(gridContainer) {
         // Get the hovered grid square
         const target = event.target;
         console.log(`out <- ${target.id}`);
+    }
+}
+
+// Create and display button to change grid density
+function initializeGridDensityBtn(gridDensityBtn) {
+    gridDensityBtn.setAttribute("type", "button");
+    gridDensityBtn.textContent = "Change grid density";
+    gridDensityBtn.addEventListener("click", initiateGridDensityChange);
+    
+    gridContainer.before(gridDensityBtn);
+
+    function initiateGridDensityChange() {
+        const MIN_SIDE_LENGTH = 2;
+        const MAX_SIDE_LENGTH = 100;
+        
+        // Get new side length from user (in units of grid squares)
+        const sideLength = parseInt(
+            prompt(`Enter a side length (grid squares) between ${MIN_SIDE_LENGTH} and ${MAX_SIDE_LENGTH}`, "")
+        );
+        
+        // Do nothing if user input is invalid
+        if (isNaN(sideLength) || 
+        sideLength < MIN_SIDE_LENGTH || 
+        sideLength > MAX_SIDE_LENGTH) {
+            console.log(`Input: ${sideLength}, invalid input.`);
+            return;
+        }
+        
+        // Remove the existing grid
+        while (gridContainer.firstChild) {
+            gridContainer.firstChild.remove();
+        }
+        
+        // Create a new grid with user-specified side length
+        createGrid(gridContainer, sideLength);
     }
 }
