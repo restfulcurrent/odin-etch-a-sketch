@@ -1,27 +1,29 @@
 const gridContainer = document.querySelector(".grid-container");
 const DEFAULT_SIDELENGTH = 16;
-createGrid(gridContainer);
+initializeGrid(gridContainer);
 enablePainting(gridContainer);
 
 const gridDensityBtn = document.createElement("button");
 initializeGridDensityBtn(gridDensityBtn);
 
-// Creates a n x n grid of squares where n is the side length in terms of squares
+// Creates and displays an n x n grid of squares where n is the side length in terms of squares
 // Input: grid container div, side length (n)
-function createGrid(gridContainer, sideLength = DEFAULT_SIDELENGTH) {    
+function initializeGrid(gridContainer, sideLength = DEFAULT_SIDELENGTH) {    
     for (let i = 0; i < sideLength; i++) {
+        // Create row container
         const row = document.createElement("div");
         row.classList.add("row");
         row.setAttribute("id", `r-${i}`);
     
         for (let j = 0; j < sideLength; j++) {
+            // Create grid square and populate row
             const gridSquare = document.createElement("div");
             gridSquare.classList.add("grid-square");
             gridSquare.setAttribute("id", `gs-${i}-${j}`);
     
             row.appendChild(gridSquare);
         }
-    
+        // Display row (append to gridcontainer)
         gridContainer.appendChild(row);
     }
 }
@@ -82,6 +84,6 @@ function initializeGridDensityBtn(gridDensityBtn) {
         }
         
         // Create a new grid with user-specified side length
-        createGrid(gridContainer, sideLength);
+        initializeGrid(gridContainer, sideLength);
     }
 }
