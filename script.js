@@ -1,9 +1,11 @@
 const contentWrapper = document.querySelector(".content-wrapper");
 
+// Initialize lhs of grid
 const lhs = document.createElement("div");
 lhs.classList.add("lhs");
 contentWrapper.append(lhs);
 
+// Initialize grid
 const INITIAL_SIDELENGTH = 16;
 const grid = document.createElement("div");
 grid.classList.add("grid");  
@@ -12,6 +14,7 @@ contentWrapper.append(grid);
 
 enablePainting();
 
+// Initialize rhs of grid
 const rhs = document.createElement("div");
 rhs.classList.add("rhs");
 contentWrapper.append(rhs);
@@ -22,6 +25,16 @@ gridDensityBtn.classList.add("grid-density");
 gridDensityBtn.textContent = "Change grid density";
 gridDensityBtn.addEventListener("click", changeGridDensity);
 rhs.append(gridDensityBtn);
+
+const clearGridBtn = document.createElement("button");
+clearGridBtn.setAttribute("type", "button");
+clearGridBtn.classList.add("clear-grid");
+clearGridBtn.textContent = "Clear grid";
+clearGridBtn.addEventListener("click", clearGrid);
+rhs.append(clearGridBtn);
+
+
+
 
 // Create a square grid of squares
 // Input: side length (in units of grid squares)
@@ -96,4 +109,10 @@ function changeGridDensity() {
 
     // Create a new grid with user-specified side length
     populateGrid(sideLength);
+}
+
+// Removes paint from painted elements
+function clearGrid() {
+    const painted = document.querySelectorAll(".hovered");
+    painted.forEach(element => element.classList.remove("hovered"));
 }
