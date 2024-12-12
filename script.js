@@ -86,7 +86,7 @@ function enablePainting() {
         console.log(`over -> ${target.id}`);
     
         // Paint the grid square
-        // target.classList.add("hovered");
+        target.classList.add("painted");
         target.style.backgroundColor = paintColor;
     }
     
@@ -126,10 +126,10 @@ function changeGridDensity() {
 
 // Removes paint from painted elements
 function clearGrid() {
-    const painted = document.querySelectorAll(".hovered");
+    const painted = document.querySelectorAll(".painted");
     painted.forEach(element => {
         // CLear styles applied via external css
-        element.classList.remove("hovered");
+        element.classList.remove("painted");
 
         // Clear inline styles applied via the color picker
         element.style.backgroundColor = "";
