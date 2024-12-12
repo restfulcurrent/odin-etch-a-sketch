@@ -12,6 +12,8 @@ grid.classList.add("grid");
 populateGrid(INITIAL_SIDELENGTH);
 contentWrapper.append(grid);
 
+const DEFAULT_COLOR = "#a8b6f7";
+let paintColor = DEFAULT_COLOR;
 enablePainting();
 
 // Initialize rhs of grid
@@ -33,6 +35,16 @@ clearGridBtn.textContent = "Clear grid";
 clearGridBtn.addEventListener("click", clearGrid);
 rhs.append(clearGridBtn);
 
+const colorPicker = document.createElement("input");
+colorPicker.setAttribute("type", "color");
+colorPicker.setAttribute("value", DEFAULT_COLOR);
+colorPicker.addEventListener("input", updatePaintColor, false);
+colorPicker.select();
+rhs.append(colorPicker);
+
+function updatePaintColor(event) {
+    paintColor = event.target.value;
+}
 
 
 
@@ -74,7 +86,8 @@ function enablePainting() {
         console.log(`over -> ${target.id}`);
     
         // Paint the grid square
-        target.classList.add("hovered");
+        // target.classList.add("hovered");
+        target.style.backgroundColor = paintColor;
     }
     
     function logMouseOut(event) {
@@ -114,5 +127,11 @@ function changeGridDensity() {
 // Removes paint from painted elements
 function clearGrid() {
     const painted = document.querySelectorAll(".hovered");
-    painted.forEach(element => element.classList.remove("hovered"));
+    painted.forEach(element => {
+        // CLear styles applied via external css
+        element.classList.remove("hovered");
+
+        // Clear inline styles applied via the color picker
+        element.style.backgroundColor = "";
+    });
 }
