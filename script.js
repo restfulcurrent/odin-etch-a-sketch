@@ -12,7 +12,7 @@ const rhs = document.createElement("div");
 rhs.classList.add("rhs");
 contentWrapper.append(rhs);
 
-// enablePainting(grid);
+enablePainting(grid);
 
 // const gridDensityBtn = document.createElement("button");
 // initializeGridDensityBtn(gridDensityBtn);
@@ -45,30 +45,30 @@ function createGrid(sideLength) {
     return grid;
 }
 
-// Paintsgrid squares when they are hovered over
-// function enablePainting(grid) {
-//     grid.addEventListener("mouseover", logMouseOver);
-//     grid.addEventListener("mouseout", logMouseOut);
+// Paints grid squares when they are hovered over
+function enablePainting(grid) {
+    grid.addEventListener("mouseover", logMouseOver);
+    grid.addEventListener("mouseout", logMouseOut);
     
-//     function logMouseOver(event) {
-//         // Get the hovered grid square
-//         const target = event.target;
+    function logMouseOver(event) {
+        // Get the hovered grid square
+        const target = event.target;
 
-//         // If target is not a grid square, do nothing
-//         if (!target.classList.contains("grid-square")) return;
+        // If target is not a grid square, do nothing
+        if (!target.classList.contains("grid-square")) return;
 
-//         console.log(`over -> ${target.id}`);
+        console.log(`over -> ${target.id}`);
     
-//         // Paint the grid square
-//         target.classList.add("hovered");
-//     }
+        // Paint the grid square
+        target.classList.add("hovered");
+    }
     
-//     function logMouseOut(event) {
-//         // Get the hovered grid square
-//         const target = event.target;
-//         console.log(`out <- ${target.id}`);
-//     }
-// }
+    function logMouseOut(event) {
+        // Get the hovered grid square
+        const target = event.target;
+        console.log(`out <- ${target.id}`);
+    }
+}
 
 // Create and display button to change grid density
 // function initializeGridDensityBtn(gridDensityBtn) {
