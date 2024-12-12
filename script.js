@@ -42,12 +42,6 @@ colorPicker.addEventListener("input", updatePaintColor, false);
 colorPicker.select();
 rhs.append(colorPicker);
 
-function updatePaintColor(event) {
-    paintColor = event.target.value;
-}
-
-
-
 // Create a square grid of squares
 // Input: side length (in units of grid squares)
 // Returns a reference to the grid (node element)
@@ -134,4 +128,10 @@ function clearGrid() {
         // Clear inline styles applied via the color picker
         element.style.backgroundColor = "";
     });
+}
+
+// Event handler for color picker input
+// Updates paint color based on input
+function updatePaintColor(event) {
+    paintColor = event.target.value;
 }
