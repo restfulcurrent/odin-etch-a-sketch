@@ -1,9 +1,11 @@
 const contentWrapper = document.querySelector(".content-wrapper");
 
+
 // Initialize lhs of grid
 const lhs = document.createElement("div");
 lhs.classList.add("lhs");
 contentWrapper.append(lhs);
+
 
 // Initialize grid
 const INITIAL_SIDELENGTH = 16;
@@ -21,6 +23,7 @@ grid.addEventListener("mouseover", paintGridSquare);
 let isPainting = false;
 // Toggle painting from within the grid by clicking the mouse
 grid.addEventListener("click", togglePaintBrush);
+
 
 // Initialize rhs of grid
 const rhs = document.createElement("div");
@@ -69,6 +72,28 @@ checkboxWrapper.setAttribute("class", "checkbox-wrapper")
 checkboxWrapper.append(paintbrushCheckbox);
 checkboxWrapper.append(paintbrushLabel);
 rhs.append(checkboxWrapper);
+
+// Add divs surronding content-wrapper
+const above = document.createElement("div");
+above.classList.add("above");
+document.body.prepend(above);
+
+const below = document.createElement("div");
+below.classList.add("below");
+contentWrapper.after(below);
+
+// Add a title to the div above the content wrapper
+const title = document.createElement("h1");
+title.classList.add("title");
+title.textContent = "Sketch Pad";
+above.append(title);
+
+// Add a description bewlow the title
+const description = document.createElement("p");
+description.classList.add("description");
+description.textContent = "Click anywhere inside the canvas to toggle the paint brush";
+above.append(description);
+
 
 // Create a square grid of squares
 // Input: side length (in units of grid squares)

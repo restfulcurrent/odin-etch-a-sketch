@@ -10,13 +10,16 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     background-color: rgb(235, 235, 235);
+    gap: 32px;
+}
+
+body > * {
+    flex: 1 1 0;
 }
 
 .content-wrapper {
     display: flex;
-    padding: 40px;
     gap: 2%;
 }
 
@@ -57,5 +60,13 @@ button {
 
 .checkbox-wrapper {
     display: flex;
+    gap: 8px;
+ }
+
+ .above {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
     gap: 8px;
  }
