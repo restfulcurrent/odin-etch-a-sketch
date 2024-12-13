@@ -18,6 +18,11 @@ let paintColor = DEFAULT_COLOR;
 grid.addEventListener("mouseover", paintGridSquare);
 grid.addEventListener("mouseout", logMouseOut);
 
+// Disable painting by default
+let isPainting = false;
+// Toggle painting from within the grid by clicking the mouse
+grid.addEventListener("click", togglePaintBrush);
+
 // Initialize rhs of grid
 const rhs = document.createElement("div");
 rhs.classList.add("rhs");
@@ -121,6 +126,8 @@ function updatePaintColor(event) {
 }
 
 function paintGridSquare(event) {
+    if (!isPainting) return; 
+    
     const PAINTED = "painted";
     // Get the hovered grid square
     const target = event.target;
@@ -158,4 +165,8 @@ function logMouseOut(event) {
     // Get the hovered grid square
     const target = event.target;
     console.log(`out <- ${target.id}`);
+}
+
+function togglePaintBrush(event) {
+    isPainting = !isPainting;
 }
