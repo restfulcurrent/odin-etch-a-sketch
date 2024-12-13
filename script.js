@@ -12,15 +12,18 @@ grid.classList.add("grid");
 populateGrid(INITIAL_SIDELENGTH);
 contentWrapper.append(grid);
 
+// Paint grid square when hovered over
 const DEFAULT_COLOR = "#a8b6f7";
 let paintColor = DEFAULT_COLOR;
-enablePainting();
+grid.addEventListener("mouseover", paintGridSquare);
+grid.addEventListener("mouseout", logMouseOut);
 
 // Initialize rhs of grid
 const rhs = document.createElement("div");
 rhs.classList.add("rhs");
 contentWrapper.append(rhs);
 
+// Initialize button to change grid density and append to rhs
 const gridDensityBtn = document.createElement("button");
 gridDensityBtn.setAttribute("type", "button");
 gridDensityBtn.classList.add("grid-density");
@@ -28,6 +31,7 @@ gridDensityBtn.textContent = "Change grid density";
 gridDensityBtn.addEventListener("click", changeGridDensity);
 rhs.append(gridDensityBtn);
 
+// Initialize button to clear the grid and append to rhs
 const clearGridBtn = document.createElement("button");
 clearGridBtn.setAttribute("type", "button");
 clearGridBtn.classList.add("clear-grid");
@@ -35,10 +39,11 @@ clearGridBtn.textContent = "Clear grid";
 clearGridBtn.addEventListener("click", clearGrid);
 rhs.append(clearGridBtn);
 
+// Initialize color picker and append to rhs
 const colorPicker = document.createElement("input");
 colorPicker.setAttribute("type", "color");
 colorPicker.setAttribute("value", DEFAULT_COLOR);
-colorPicker.addEventListener("input", updatePaintColor, false);
+colorPicker.addEventListener("input", updatePaintColor);
 colorPicker.select();
 rhs.append(colorPicker);
 
@@ -62,32 +67,6 @@ function populateGrid(sideLength) {
         }
         // Display row (append to grid)
         grid.appendChild(row);
-    }
-}
-
-// Paints grid squares when they are hovered over
-function enablePainting() {
-    grid.addEventListener("mouseover", logMouseOver);
-    grid.addEventListener("mouseout", logMouseOut);
-    
-    function logMouseOver(event) {
-        // Get the hovered grid square
-        const target = event.target;
-
-        // If target is not a grid square, do nothing
-        if (!target.classList.contains("grid-square")) return;
-
-        console.log(`over -> ${target.id}`);
-    
-        // Paint the grid square
-        target.classList.add("painted");
-        target.style.backgroundColor = paintColor;
-    }
-    
-    function logMouseOut(event) {
-        // Get the hovered grid square
-        const target = event.target;
-        console.log(`out <- ${target.id}`);
     }
 }
 
@@ -122,8 +101,13 @@ function changeGridDensity() {
 function clearGrid() {
     const painted = document.querySelectorAll(".painted");
     painted.forEach(element => {
-        // CLear styles applied via external css
+        // Clear styles applied via external css
         element.classList.remove("painted");
+
+        const paintColor = [...element.classList].find(className => className.startsWith("#"));
+        element.classList.remove(paintColor);
+
+        element.style.opacity = "";
 
         // Clear inline styles applied via the color picker
         element.style.backgroundColor = "";
@@ -134,4 +118,44 @@ function clearGrid() {
 // Updates paint color based on input
 function updatePaintColor(event) {
     paintColor = event.target.value;
+}
+
+function paintGridSquare(event) {
+    const PAINTED = "painted";
+    // Get the hovered grid square
+    const target = event.target;
+
+    // If target is not a grid square, do nothing
+    if (!target.classList.contains("grid-square")) return;
+
+    console.log(`over -> ${target.id}`);
+
+    if (target.classList.contains(PAINTED)) {
+        const MAX_OPACITY = 1;
+        const DARKEN_FACTOR = 1.2;
+        const LIGHTEN_DIVISOR = 2;
+
+        const prevPaintColor = [...target.classList].find(className => className.startsWith("#"));
+        const opacity = parseFloat(target.style.opacity);
+
+        if (prevPaintColor === paintColor) {
+            target.style.opacity = Math.min(MAX_OPACITY, opacity * DARKEN_FACTOR);
+        } else {
+            target.classList.replace(prevPaintColor, paintColor);
+            target.style.opacity = opacity / LIGHTEN_DIVISOR ;
+            target.style.backgroundColor = paintColor;
+        }
+
+    } else {
+        const DEFAULT_OPACITY = 0.35;
+        target.classList.add(PAINTED, paintColor);
+        target.style.backgroundColor = paintColor;
+        target.style.opacity = DEFAULT_OPACITY;
+    }
+}
+
+function logMouseOut(event) {
+    // Get the hovered grid square
+    const target = event.target;
+    console.log(`out <- ${target.id}`);
 }
