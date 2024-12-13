@@ -42,7 +42,7 @@ rhs.append(gridDensityBtn);
 const clearGridBtn = document.createElement("button");
 clearGridBtn.setAttribute("type", "button");
 clearGridBtn.classList.add("clear-grid");
-clearGridBtn.textContent = "Clear grid";
+clearGridBtn.textContent = "Clear";
 clearGridBtn.addEventListener("click", clearGrid);
 rhs.append(clearGridBtn);
 
