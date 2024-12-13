@@ -16,7 +16,6 @@ contentWrapper.append(grid);
 const DEFAULT_COLOR = "#a8b6f7";
 let paintColor = DEFAULT_COLOR;
 grid.addEventListener("mouseover", paintGridSquare);
-grid.addEventListener("mouseout", logMouseOut);
 
 // Disable painting by default
 let isPainting = false;
@@ -178,12 +177,6 @@ function paintGridSquare(event) {
         target.style.backgroundColor = paintColor;
         target.style.opacity = DEFAULT_OPACITY;
     }
-}
-
-function logMouseOut(event) {
-    // Get the hovered grid square
-    const target = event.target;
-    console.log(`out <- ${target.id}`);
 }
 
 function togglePaintBrush(event) {
