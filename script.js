@@ -52,6 +52,25 @@ colorPicker.addEventListener("input", updatePaintColor);
 colorPicker.select();
 rhs.append(colorPicker);
 
+// Toggle painting from outside of the grid via a checkbox
+// Initialize checkbox
+const paintbrushCheckbox = document.createElement("input");
+paintbrushCheckbox.setAttribute("type", "checkbox");
+paintbrushCheckbox.addEventListener("change", togglePaintBrush);
+paintbrushCheckbox.setAttribute("id", "paintbrushCheckbox");
+
+// Initialize checkbox label
+const paintbrushLabel = document.createElement("label");
+paintbrushLabel.setAttribute("for", "paintbrushCheckbox");
+paintbrushLabel.textContent = "Paintbrush";
+
+// Wrap the checkbox and label in a div and display
+const checkboxWrapper = document.createElement("div");
+checkboxWrapper.setAttribute("class", "checkbox-wrapper")
+checkboxWrapper.append(paintbrushCheckbox);
+checkboxWrapper.append(paintbrushLabel);
+rhs.append(checkboxWrapper);
+
 // Create a square grid of squares
 // Input: side length (in units of grid squares)
 // Returns a reference to the grid (node element)
@@ -127,7 +146,7 @@ function updatePaintColor(event) {
 
 function paintGridSquare(event) {
     if (!isPainting) return; 
-    
+
     const PAINTED = "painted";
     // Get the hovered grid square
     const target = event.target;
@@ -168,5 +187,8 @@ function logMouseOut(event) {
 }
 
 function togglePaintBrush(event) {
+    if (event.type === "click") {
+    paintbrushCheckbox.checked = !paintbrushCheckbox.checked;
+    }
     isPainting = !isPainting;
 }

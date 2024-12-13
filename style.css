@@ -51,10 +51,11 @@ body {
     background-color: white;
 }
 
-/* .hovered {
-    background-color: rgb(168, 182, 247);
-} */
-
 button {
     padding: 2px 4px;
 }
+
+.checkbox-wrapper {
+    display: flex;
+    gap: 8px;
+ }
